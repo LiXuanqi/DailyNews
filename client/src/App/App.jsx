@@ -18,7 +18,7 @@ class App extends Component {
           </div>
         </nav>
 
-        <div classNameName="container">
+        <div className="container">
           <NewsPanel />
         </div>
 

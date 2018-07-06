@@ -16,32 +16,21 @@ class NewsPanel extends React.Component{
 
 
   loadMoreNews() {
-    this.setState({
-      news: [
-        {
-          title: 'News1',
-          urlToImage: 'https://pic3.zhimg.com/v2-e505ddbe00a4677fa1f2e95b69f9ea4a.jpg',
-          description: "The ruling sends a strong message that Trump has broad powers under immigration law to act to protect national security and that statements made during a campaign may not be legally determinative of the President's intent.",
-          url: 'http://www.baidu.com',
-          source: 'CNN',
-          reason: 'Hot',
-          time: "2017-05-18"
-        },
-        {
-          title: 'News2',
-          urlToImage: 'https://pic3.zhimg.com/v2-e505ddbe00a4677fa1f2e95b69f9ea4a.jpg',
-          description: "The ruling sends a strong message that Trump has broad powers under immigration law to act to protect national security and that statements made during a campaign may not be legally determinative of the President's intent.",
-          url: 'http://www.baidu.com',
-          source: 'BBC',
-          reason: 'Hot',
-          time: "2017-05-18"
-        }
-      ]
+    let request = new Request('http://localhost:5000/news', {
+      method: 'GET'
     });
+
+    fetch(request)
+      .then(res => res.json())
+      .then(news => {
+        this.setState({
+          news: this.state.news ? this.state.news.concat(news) : news,
+        });
+      });
   }
 
   renderNews() {
-    let news_list = this.state.news.map(function(news) {
+    let news_list = this.state.news.map((news) => {
       return(
         <div className='list-group-item' key={news.digest}>
           <NewsCard news={news} />
