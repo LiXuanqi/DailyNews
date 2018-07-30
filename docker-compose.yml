@@ -1,0 +1,5 @@
+mongodb:
+  image: mongo
+  container_name: mongodb-news
+  ports:
+    - "27017:27017"
